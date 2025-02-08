@@ -25,7 +25,7 @@ class PatientController extends Controller
         $patient = Patient::where('slug', $slug)->firstOrFail();
 
         $patient->update([
-            // 'name' => $request->name,
+            'name' => $request->name,
             'email' => $request->email,
         ]);
 
