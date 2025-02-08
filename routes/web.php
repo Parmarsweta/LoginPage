@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\LoginPageController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -101,3 +102,6 @@ Route::post('/students/store', [StudentController::class, 'store'])->name('stude
 
 Route::get('/patient/{slug}/edit', [PatientController::class, 'edit'])->name('patient.edit');
 Route::post('/patient/{slug}/update', [PatientController::class, 'update'])->name('patient.update');
+
+//orders
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
