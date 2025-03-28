@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\LoginPageController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -105,3 +106,6 @@ Route::post('/patient/{slug}/update', [PatientController::class, 'update'])->nam
 
 //orders
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+/****** Product  ****/
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::post('/download-pdfs', [ProductController::class, 'downloadPDFs'])->name('download.pdfs');
