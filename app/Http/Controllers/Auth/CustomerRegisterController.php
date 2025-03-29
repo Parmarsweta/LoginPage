@@ -39,7 +39,7 @@ class CustomerRegisterController extends Controller
 
         // Create the customer
         $customer = $this->create($request->all());
-        $customer = new Employee();
+        $customer = new Customer();
 
         // Log the customer in
         auth()->guard('customer')->login($customer);
