@@ -12,6 +12,7 @@
         <th>Title</th>
         <th>Author</th>
         <th>Content</th>
+        <th>image</th>
         <th>Date</th>
     </tr>
     @foreach ($posts as $post)
@@ -19,6 +20,7 @@
         <td>{{ $posts->title }}</td>
         <td></td>
         <td>{{ $posts->content }}</td>
+        <td>{{ $posts->image }}</td>
         <td>{{ $posts->created_at  }}</td>
     </tr>
     @endforeach

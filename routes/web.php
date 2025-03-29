@@ -12,6 +12,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -109,3 +110,7 @@ Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 /****** Product  ****/
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/download-pdfs', [ProductController::class, 'downloadPDFs'])->name('download.pdfs');
+
+Route::get('posts',[PostController::class, 'index'])->name('post.index');
+Route::get('posts/create',[PatientController::class, 'create'])->name('post.create');
+Route::post('posts/{id}',[PostController::class, 'store'])->name('post.store');
