@@ -7,60 +7,61 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $post = Post::all();
-        return view('post.index');
+        $posts = Post::all();
+        return view('post.index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('post.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $posts = new Post();
+        $posts->user_id = 1;
+        $posts->title = $request->title;
+        $posts->content = $request->content;
+        $posts->save();
+
+        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('post.create', compact('post')); // ✅ Pass post data to the form
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $post = Post::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+            $post->image = $imagePath;
+        }
+
+        $post->title = $validatedData['title'];
+        $post->content = $validatedData['content'];
+        $post->save();
+
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $post = Post::findOrFail($id);
+        $post->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
     }
 }

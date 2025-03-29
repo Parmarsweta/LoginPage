@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Patient;
+use App\Models\Post;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Patient::factory()->count(20)->create();
+        // Patient::factory()->count(20)->create();
+        Post::factory()->count(20)->create(); // Generates 20 dummy posts
+
+
     }
 }

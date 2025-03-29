@@ -14,4 +14,6 @@ class Post extends Model
         'image',
         'user_id',
         ];
+
+    public $table = 'posts';
 }
